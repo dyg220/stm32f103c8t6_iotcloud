@@ -7,26 +7,26 @@
 		__asm("nop");
 	}
 }*/
-	
+
 void delay_us(uint32_t xus)
 {
-    while (xus--)
-    {
-        __ASM("nop"); __ASM("nop"); \
-        __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop");__ASM("nop"); __ASM("nop");
-    }
+	while (xus--)
+	{
+		__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); __ASM("nop"); \
+			__ASM("nop"); __ASM("nop");
+	}
 }
 
 void delay_ms(uint32_t xms)
 {
-    while (xms--)
-    {
-        delay_us(1000);
-    }
+	while (xms--)
+	{
+		delay_us(1000);
+	}
 }
