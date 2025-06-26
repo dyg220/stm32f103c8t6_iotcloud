@@ -11,7 +11,6 @@ int main()
 	//dcMotor_Config();
 	//USART1_SendStr((u8*)"Hello, USART1!\r\n");
 	printf("Reset!!!\r\n");
-
 	while (1)
 	{
 		key_num = Key_Scan();
