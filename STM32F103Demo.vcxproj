@@ -118,6 +118,7 @@
     <ClCompile Include="STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c" />
     <ClCompile Include="User\src\delay.c" />
     <ClCompile Include="User\src\main.c" />
+    <ClCompile Include="User\src\usart1.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMSIS\core_cm3.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h" />
     <ClInclude Include="User\inc\delay.h" />
     <ClInclude Include="User\inc\main.h" />
+    <ClInclude Include="User\inc\usart1.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CMSIS\startup_stm32f10x_md.s" />
