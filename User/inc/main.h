@@ -6,6 +6,6 @@
 #include "key.h"
 #include "relay.h"
 #include "usart1.h"
-
+#include "dc_motor.h"
 
 #endif // _MAIN_H_

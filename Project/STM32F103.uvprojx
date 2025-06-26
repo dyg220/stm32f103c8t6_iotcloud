@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Cmsis;..\STM32F10x_StdPeriph_Driver\inc;..\User\inc;..\Hardwear\LED;..\Hardwear\KEY;..\Hardwear\RELAY</IncludePath>
+              <IncludePath>..\Cmsis;..\STM32F10x_StdPeriph_Driver\inc;..\User\inc;..\Hardwear\LED;..\Hardwear\KEY;..\Hardwear\RELAY;..\Hardwear\DCMotor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -446,6 +446,11 @@
               <FileName>relay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardwear\RELAY\relay.c</FilePath>
+            </File>
+            <File>
+              <FileName>dc_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardwear\DCMotor\dc_motor.c</FilePath>
             </File>
           </Files>
         </Group>

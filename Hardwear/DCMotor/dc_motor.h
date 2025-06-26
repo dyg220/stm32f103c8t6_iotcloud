@@ -1,0 +1,16 @@
+#ifndef _DC_MOTOR_H_
+#define _DC_MOTOR_H_
+#include "stm32f10x.h"
+
+#define MOTOR_IA_High    GPIO_SetBits(GPIOB,GPIO_Pin_5);
+#define MOTOR_IA_Low     GPIO_ResetBits(GPIOB,GPIO_Pin_5);
+#define MOTOR_IB_High    GPIO_SetBits(GPIOB,GPIO_Pin_4);
+#define MOTOR_IB_Low     GPIO_ResetBits(GPIOB,GPIO_Pin_4);
+
+void dcMotor_Config(void);
+void MotorRun1(void);
+void MotorRun2(void);
+void ClosedcMotor(void);
+
+
+#endif

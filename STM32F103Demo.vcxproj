@@ -84,7 +84,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakePreprocessorDefinitions>__arm__;__CC_ARM;__GNUC__;USE_STDPERIPH_DRIVER;STM32F10X_MD</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;./Cmsis;./STM32F10x_StdPeriph_Driver/inc;./User/inc;./Hardwear/LED;./Hardwear/KEY;./Hardwear/RELAY</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;C:\stm32_work\0_STM32F103C8T6\Cmsis;C:\stm32_work\0_STM32F103C8T6\STM32F10x_StdPeriph_Driver\inc;C:\stm32_work\0_STM32F103C8T6\User\inc;C:\stm32_work\0_STM32F103C8T6\Hardwear\LED;C:\stm32_work\0_STM32F103C8T6\Hardwear\KEY;C:\stm32_work\0_STM32F103C8T6\Hardwear\RELAY;C:\stm32_work\0_STM32F103C8T6\Hardwear\DCMotor</NMakeIncludeSearchPath>
+    <RemoteCCompileToolExe>gcc</RemoteCCompileToolExe>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="CMSIS\core_cm3.c" />
@@ -92,6 +93,7 @@
     <ClCompile Include="CMSIS\system_stm32f10x.c" />
     <ClCompile Include="Hardwear\KEY\key.c" />
     <ClCompile Include="Hardwear\LED\led.c" />
+    <ClCompile Include="Hardwear\DCMotor\dc_motor.c" />
     <ClCompile Include="Hardwear\RELAY\relay.c" />
     <ClCompile Include="STM32F10x_StdPeriph_Driver\src\misc.c" />
     <ClCompile Include="STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c" />
@@ -129,6 +131,7 @@
     <ClInclude Include="CMSIS\system_stm32f10x.h" />
     <ClInclude Include="Hardwear\KEY\key.h" />
     <ClInclude Include="Hardwear\LED\led.h" />
+    <ClInclude Include="Hardwear\DCMotor\dc_motor.h" />
     <ClInclude Include="Hardwear\RELAY\relay.h" />
     <ClInclude Include="STM32F10x_StdPeriph_Driver\inc\misc.h" />
     <ClInclude Include="STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h" />
