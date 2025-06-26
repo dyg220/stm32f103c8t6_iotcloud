@@ -1,5 +1,5 @@
 #include "usart1.h"
-
+#include <stdio.h>
 
 void USART1_Config(u32 baud)
 {
@@ -25,6 +25,7 @@ void USART1_Config(u32 baud)
 	USART_Cmd(USART1, ENABLE);
 	// USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // Enable RXNE interrupt
 }
+
 void USART1_SendByte(u8 data)
 {
 	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // µÈ·¢ËÍ¼Ä´æÆ÷¿Õ
