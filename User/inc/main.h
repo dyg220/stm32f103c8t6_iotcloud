@@ -8,10 +8,4 @@
 #include "usart1.h"
 
 
-
-
 #endif // _MAIN_H_
-
-
-
-

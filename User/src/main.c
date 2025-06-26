@@ -2,14 +2,16 @@
 
 int main()
 {
+	//u8 key_num = 0;
 	LED_Init();
 	Key_Init();
 	Relay_Init();
-	USART1_Init();
-
+	USART1_Config(115200);
+	//USART1_SendStr((u8*)"Hello, USART1!\r\n");
+	printf("hello");
 	while (1)
 	{
-		/*u8 key_num = Key_Scan();
+		/* key_num = Key_Scan();
 		if (key_num == key1_click)
 		{
 			RELAY_ON;
@@ -20,8 +22,8 @@ int main()
 			RELAY_OFF;
 		}*/
 
-		USART1_SendByte('A');
-		delay_ms(1000);
+		//USART1_SendByte('A');
+
 
 	}
 	return 0;
