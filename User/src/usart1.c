@@ -1,5 +1,9 @@
 #include "usart1.h"
 #include <stdio.h>
+#include <string.h>
+
+
+USART1_INFO USART1_Recv = { 0 };
 
 void USART1_Config(u32 baud)
 {
@@ -47,6 +51,8 @@ void USART1_SendByte(u8 data)
 	USART_SendData(USART1, data);
 }
 
+
+
 void USART1_SendStr(u8* str)
 {
 	while (*str != '\0')
@@ -57,15 +63,20 @@ void USART1_SendStr(u8* str)
 	USART1_SendByte('\0'); // 发送字符串结束符
 }
 
+
 void USART1_IRQHandler(void)  //中断服务函数
 {
 	u8 clear = 0;
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET) //接收中断
 	{
 		USART_ClearITPendingBit(USART1, USART_IT_RXNE); //清除中断标志
-		u8 data = USART_ReceiveData(USART1); //读取接收到的数据
-		printf("%c", data);  //不建议在中断中使用printf，因为printf可能会阻塞，导致中断响应延迟
-
+		//u8 data = USART_ReceiveData(USART1); //读取接收到的数据
+		//printf("%c", data);  //不建议在中断中使用printf，因为printf可能会阻塞，导致中断响应延迟
+		if (USART1_Recv.index < Max_Size - 1) // 防止溢出
+		{
+			USART1_Recv.data[USART1_Recv.index] = USART_ReceiveData(USART1); //;将数据读出还能清除标志位
+			USART1_Recv.index++;
+		}
 	}
 	if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET) //空闲中断
 	{
@@ -74,9 +85,24 @@ void USART1_IRQHandler(void)  //中断服务函数
 		clear = USART1->SR; // 读取状态寄存器，清除中断标志		
 		clear = USART1->DR; // 读取数据寄存器，清除中断标志
 		(void)clear; // 避免编译器警告
-		printf("------IDLE------\r\n");
+		USART1_Recv.data[USART1_Recv.index] = '\0';
+		USART1_Recv.flag = 1;
+		USART1_Recv.index = 0;
+		//printf("------IDLE------\r\n");
 	}
 }
+
+void RECV_USART1(void)
+{
+	if (USART1_Recv.flag == 1)
+	{
+		printf("%s\r\n", USART1_Recv.data);
+		USART1_Recv.flag = 0;
+		memset(USART1_Recv.data, 0, sizeof(USART1_Recv.data));
+	}
+}
+
+
 #if 1
 #pragma import(__use_no_semihosting)             
 //标准库需要的支持函数                 

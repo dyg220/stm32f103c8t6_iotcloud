@@ -164,6 +164,7 @@
     <None Include="CMSIS\startup_stm32f10x_md.s" />
     <None Include="keilkill.bat" />
     <None Include="README.md" />
+    <None Include="test1.v" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

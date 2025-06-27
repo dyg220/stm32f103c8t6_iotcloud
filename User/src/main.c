@@ -26,6 +26,7 @@ int main()
 		{
 			ClosedcMotor();
 		}
+		RECV_USART1(); // 接收USART1数据
 	}
 	return 0;
 }
