@@ -8,9 +8,7 @@
 #define MOTOR_IB_Low     GPIO_ResetBits(GPIOB,GPIO_Pin_4);
 
 void dcMotor_Config(void);
-void MotorRun1(void);
-void MotorRun2(void);
-void ClosedcMotor(void);
+void DCMotor_SetSpeed(int speed);
 
 
 #endif

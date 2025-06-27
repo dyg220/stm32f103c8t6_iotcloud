@@ -29,32 +29,42 @@ void dcMotor_Config(void)
 	TIM_InternalClockConfig(TIM3); //选择内部时钟源
 
 	TIM_OCInitTypeDef TIM_OCInitStruct;
-	TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM1; //PWM模式1
+	TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM1; //PWM模式1: CNT<CCR 有效电平
 	TIM_OCInitStruct.TIM_OutputState = TIM_OutputState_Enable; //输出使能
-	TIM_OCInitStruct.TIM_Pulse = 500; //占空比50%
+	TIM_OCInitStruct.TIM_Pulse = 0; //ccr
 	TIM_OCInitStruct.TIM_OCPolarity = TIM_OCPolarity_High; //极性高
 	TIM_OC1Init(TIM3, &TIM_OCInitStruct); //通道1初始化
+	TIM_OC2Init(TIM3, &TIM_OCInitStruct); //通道1初始化
+	//ARR CCR
+	TIM_ARRPreloadConfig(TIM3, ENABLE); //ARR预装载
+	TIM_CCPreloadControl(TIM3, ENABLE); //CCR预装载
 
 	TIM_Cmd(TIM3, ENABLE); //使能定时器3
 
-	MOTOR_IB_Low;
-	MOTOR_IA_Low;
-
 }
-void MotorRun1(void)
+/*
+speed: 0-100	 -左转 +右转
+*/
+void DCMotor_SetSpeed(int speed)
 {
-	MOTOR_IB_High;
-	delay_ms(400);
-	MOTOR_IB_Low;
+	if (speed > 100)
+	{
+		speed = 100;
+	}
+	if (speed < -100)
+	{
+		speed = -100;
+	}
+	if (speed >= 0)
+	{
+		TIM_SetCompare1(TIM3, speed); //设置通道1的比较值
+		TIM_SetCompare2(TIM3, 0); //
+	}
+	else
+	{
+		TIM_SetCompare1(TIM3, 0); //设置通道1的比较值
+		TIM_SetCompare2(TIM3, -speed); //
+	}
 
-}
-void MotorRun2(void) {
-	MOTOR_IB_Low;
-	delay_ms(400);
-	MOTOR_IA_High;
-}
-void ClosedcMotor(void) {
-	MOTOR_IB_High;
-	delay_ms(400);
-	MOTOR_IA_High;
+
 }
