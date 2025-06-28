@@ -66,5 +66,4 @@ void DCMotor_SetSpeed(int speed)
 		TIM_SetCompare2(TIM3, -speed); //
 	}
 
-
 }

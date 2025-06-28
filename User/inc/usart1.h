@@ -19,6 +19,4 @@ void USART1_SendByte(u8 data);
 void USART1_SendStr(u8* str);
 void RECV_USART1(void);
 
-
-
 #endif // !_USART1_H
