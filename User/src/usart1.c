@@ -1,58 +1,72 @@
 #include "usart1.h"
 #include <stdio.h>
-#include <string.h>
 
-
-USART1_INFO USART1_Recv = { 0 };
-
-void USART1_Config(u32 baud)
+/****************************************************
+函数功能：USART1初始化函数
+参    数：Baud 波特率
+返 回 值：None
+备    注：USART1_TX---PA9	复用推挽
+		  USART1_RX---PA10  浮空输入
+*****************************************************/
+void USART1_Config(u32 Baud)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); // enable clock for GPIOA
-	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); // enable clock for AFIO
+	//开时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
-	GPIO_InitTypeDef GPIO_InitStructure = { 0 };
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;       // PA9 (TX) 复用推挽输出
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	//配置GPIO
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;//复用推挽
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;//浮空输入
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_10;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;            // PA10 (RX) 浮空输入
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-
+	//开时钟
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-	USART_InitTypeDef USART_InitStructure = { 0 };
-	USART_InitStructure.USART_BaudRate = baud;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
-	USART_Init(USART1, &USART_InitStructure);
 
+	USART_InitTypeDef USART_InitStruct = { 0 };
+	USART_InitStruct.USART_BaudRate = Baud;//波特率
+	USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//硬件流控制
+	USART_InitStruct.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;//使能发送器和接收器
+	USART_InitStruct.USART_Parity = USART_Parity_No;//无校验位
+	USART_InitStruct.USART_StopBits = USART_StopBits_1;//停止位
+	USART_InitStruct.USART_WordLength = USART_WordLength_8b;//数据位
+	USART_Init(USART1, &USART_InitStruct);
 
-	NVIC_InitTypeDef NVIC_InitStructure = { 0 };
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn; // USART1 interrupt channel
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3; // Preemption priority
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; // Subpriority
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; // Enable the USART1 interrupt
-	NVIC_Init(&NVIC_InitStructure); // Initialize NVIC with the configuration
+	NVIC_InitTypeDef NVIC_InitStruct = { 0 };
+	NVIC_InitStruct.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 3;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_Init(&NVIC_InitStruct);
 
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //接收中断
-	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); // 空闲中断
+	//使能接受+空闲中断控制位
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);
 
-	USART_Cmd(USART1, ENABLE);
-
+	USART_Cmd(USART1, ENABLE);//使能USART1
 }
 
-void USART1_SendByte(u8 data)
+/****************************************************
+函数功能：USART1发送一个字节
+参    数：发送的数据
+返 回 值：None
+备    注：等待发送寄存器为空时可发送
+*****************************************************/
+void USART1_SendByte(u8 Byte)
 {
-	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // 等发送寄存器空
-	USART_SendData(USART1, data);
+	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);//等待发送寄存器为空时可发送
+	USART_SendData(USART1, Byte);
 }
 
-
-
+/****************************************************
+函数功能：USART1发送字符串
+参    数：发送的数据
+返 回 值：None
+备    注：检测到空字符时停止发送
+*****************************************************/
 void USART1_SendStr(u8* str)
 {
 	while (*str != '\0')
@@ -60,37 +74,39 @@ void USART1_SendStr(u8* str)
 		USART1_SendByte(*str);
 		str++;
 	}
-	USART1_SendByte('\0'); // 发送字符串结束符
+	USART1_SendByte('\0');
 }
 
 
-void USART1_IRQHandler(void)  //中断服务函数
+USART1_INFO USART1_Recv = { 0 };
+
+//中断服务函数
+void USART1_IRQHandler(void)
 {
 	u8 clear = 0;
-	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET) //接收中断
+	//接受中断
+	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
 	{
-		USART_ClearITPendingBit(USART1, USART_IT_RXNE); //清除中断标志
-		//u8 data = USART_ReceiveData(USART1); //读取接收到的数据
-		//printf("%c", data);  //不建议在中断中使用printf，因为printf可能会阻塞，导致中断响应延迟
-		if (USART1_Recv.index < Max_Size - 1) // 防止溢出
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE);//清除中断标志位
+		if (USART1_Recv.index < Max_Size - 1)//防止溢出
 		{
-			USART1_Recv.data[USART1_Recv.index] = USART_ReceiveData(USART1); //;将数据读出还能清除标志位
+			USART1_Recv.data[USART1_Recv.index] = USART_ReceiveData(USART1);
 			USART1_Recv.index++;
 		}
 	}
-	if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET) //空闲中断
+	//空闲中断
+	if (USART_GetITStatus(USART1, USART_IT_IDLE) == SET)
 	{
-		USART_ClearITPendingBit(USART1, USART_IT_IDLE); //清除中断标志
-		//clear = USART_ReceiveData(USART1); //读取接收到的数据，清除中断标志
-		clear = USART1->SR; // 读取状态寄存器，清除中断标志		
-		clear = USART1->DR; // 读取数据寄存器，清除中断标志
-		(void)clear; // 避免编译器警告
+		//清除中断标志位
+		clear = USART1->SR;
+		clear = USART1->DR;
+		(void)clear;
 		USART1_Recv.data[USART1_Recv.index] = '\0';
 		USART1_Recv.flag = 1;
 		USART1_Recv.index = 0;
-		//printf("------IDLE------\r\n");
 	}
 }
+
 
 void RECV_USART1(void)
 {
@@ -103,6 +119,12 @@ void RECV_USART1(void)
 }
 
 
+/****************************************************
+函数功能：printf重定向
+参    数：None
+返 回 值：None
+备    注：
+*****************************************************/
 #if 1
 #pragma import(__use_no_semihosting)             
 //标准库需要的支持函数                 
@@ -132,4 +154,3 @@ int fputc(int ch, FILE* f)
 /**********************printf support end**********************/
 
 #endif
-
