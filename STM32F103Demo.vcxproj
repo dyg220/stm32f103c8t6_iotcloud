@@ -84,13 +84,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakePreprocessorDefinitions>__arm__;__CC_ARM;__GNUC__;USE_STDPERIPH_DRIVER;STM32F10X_MD</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;C:\stm32_work\0_STM32F103C8T6\Cmsis;C:\stm32_work\0_STM32F103C8T6\STM32F10x_StdPeriph_Driver\inc;C:\stm32_work\0_STM32F103C8T6\User\inc;C:\stm32_work\0_STM32F103C8T6\Hardwear\LED;C:\stm32_work\0_STM32F103C8T6\Hardwear\KEY;C:\stm32_work\0_STM32F103C8T6\Hardwear\RELAY;C:\stm32_work\0_STM32F103C8T6\Hardwear\DCMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\StepMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\RGB</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;C:\stm32_work\0_STM32F103C8T6\Cmsis;C:\stm32_work\0_STM32F103C8T6\STM32F10x_StdPeriph_Driver\inc;C:\stm32_work\0_STM32F103C8T6\User\inc;C:\stm32_work\0_STM32F103C8T6\Hardwear\LED;C:\stm32_work\0_STM32F103C8T6\Hardwear\KEY;C:\stm32_work\0_STM32F103C8T6\Hardwear\RELAY;C:\stm32_work\0_STM32F103C8T6\Hardwear\DCMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\StepMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\RGB;C:\stm32_work\0_STM32F103C8T6\Hardwear\DHT11</NMakeIncludeSearchPath>
     <RemoteCCompileToolExe>gcc</RemoteCCompileToolExe>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="CMSIS\core_cm3.c" />
     <ClCompile Include="CMSIS\stm32f10x_it.c" />
     <ClCompile Include="CMSIS\system_stm32f10x.c" />
+    <ClCompile Include="Hardwear\DHT11\DHT11.c" />
     <ClCompile Include="Hardwear\KEY\key.c" />
     <ClCompile Include="Hardwear\LED\led.c" />
     <ClCompile Include="Hardwear\DCMotor\dc_motor.c" />
@@ -132,6 +133,7 @@
     <ClInclude Include="CMSIS\stm32f10x_conf.h" />
     <ClInclude Include="CMSIS\stm32f10x_it.h" />
     <ClInclude Include="CMSIS\system_stm32f10x.h" />
+    <ClInclude Include="Hardwear\DHT11\DHT11.h" />
     <ClInclude Include="Hardwear\KEY\key.h" />
     <ClInclude Include="Hardwear\LED\led.h" />
     <ClInclude Include="Hardwear\DCMotor\dc_motor.h" />
