@@ -17,6 +17,7 @@ void delay_us(uint32_t xus)
 	SysTick->CTRL |= (1 << 0);//启动计数器
 	while (!(SysTick->CTRL & (1 << 16)));//等待计数完成
 	SysTick->CTRL &= ~(1 << 0);//关闭计数器
+
 }
 
 void delay_ms(uint32_t xms)
