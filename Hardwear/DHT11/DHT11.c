@@ -1,97 +1,129 @@
-#include "DHT11.h"
+#include "dht11.h"
 
+/****************************************************
+函数功能：DHT11初始化函数
+参    数：None
+返 回 值：None
+备    注：PB3---DHT11_DATA
+*****************************************************/
+void DHT11_Init(void)
+{
+	//开时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
+	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);//解除JTAG
 
+	//配置GPIO
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_OD;
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_3;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+	delay_ms(1000);//越过不稳定状态
+	DHT11_DATA_H;//空闲状态
+	delay_us(5);
+
+}
+
+/****************************************************
+函数功能：起始信号
+参    数：None
+返 回 值：None
+备    注：主机拉低总线20ms
+*****************************************************/
 void DHT11_Start(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); //禁用JTAG，启用SWD
-	GPIO_InitTypeDef GPIO_InitStructure;
-	// 配置为推挽输出模式
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	// 拉低至少18ms
-	GPIO_ResetBits(GPIOB, GPIO_Pin_3);
-	delay_ms(18); // 延时18ms
-
-	// 拉高20~40us
-	GPIO_SetBits(GPIOB, GPIO_Pin_3);
-	delay_us(30); // 延时30us
+	DHT11_DATA_L;
+	delay_ms(20);
+	DHT11_DATA_H;
 }
 
-uint8_t DHT11_CheckResponse(void)
+/****************************************************
+函数功能：响应信号
+参    数：None
+返 回 值：响应成功 返回0
+备    注：DHT11拉低83us+拉高87us
+*****************************************************/
+u8 DHT11_Respond(void)
 {
-	uint8_t response = 0;
-	// 切换为输入模式
-	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	//等待DHT11拉低信号
-	while (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3)); //等待信号线由高变低
-
-	//等待DHT11拉高信号
-	while (!GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3)); //等待信号线由低变高
-
-	//检测拉高时间是否为80us
-	delay_us(80);		//延时80us
-	if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3)) {
-		response = 1; //响应成功
-	}
-
-	return response;
-}
-//读取一位数据位
-uint8_t DHT11_ReadBit(void)
-{
-	uint8_t bit = 0;
-	while (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3)); // 等待信号线由高变低
-	delay_us(40); // 延时40us，确保信号稳定，数据“0”时隙并不是准确 26~28us，可能比这短，也可能比这长
-
-	if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3)) {
-		bit = 1; // 如果信号线拉高超过40us，则为1
-		while (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3)); // 等待信号线由高变低
-	}
-	return bit;
-}
-
-//读取一个字节数据
-uint8_t DHT11_ReadByte(void)
-{
-	uint8_t byte = 0;
-	for (uint8_t i = 0; i < 8; i++) {
-		byte <<= 1; // 左移一位
-		byte |= DHT11_ReadBit(); // 读取一位数据
-	}
-	return byte;
-}
-
-
-//获取外界温湿度
-uint8_t DHT11_ReadData(uint8_t* humidity, uint8_t* temperature)
-{
-	uint8_t data[5]; // 40位数据，5个字节
-	uint8_t checksum;
-
-	// 读取40位数据
-	for (uint8_t i = 0; i < 5; i++)
+	u8 timeout = 0;
+	while (DHT11_DATA_R == 1)//等待从机拉低总线
 	{
-		data[i] = DHT11_ReadByte();
+		timeout++;
+		delay_us(1);
+		if (timeout > 50) return 1;
 	}
-
-	// 校验数据
-	checksum = data[0] + data[1] + data[2] + data[3];
-	if (checksum != data[4])
+	timeout = 0;
+	while (DHT11_DATA_R == 0)//等待从机响应信号83us过去
 	{
-		return 1; // 校验失败
+		timeout++;
+		delay_us(1);
+		if (timeout > 100) return 2;
 	}
-
-	// 提取温湿度数据
-	*humidity = data[0]; // 湿度整数
-	*temperature = data[2]; // 温度整数
-	return 0; // 成功
+	timeout = 0;
+	while (DHT11_DATA_R == 1)//等待从机通知信号87us过去
+	{
+		timeout++;
+		delay_us(1);
+		if (timeout > 120) return 3;
+	}
+	return 0;
 }
 
+/****************************************************
+函数功能：获取40位数据
+参    数：None
+返 回 值：成功0
+备    注：
+*****************************************************/
+u8 DHT11_ReadData(u8* Data)
+{
+	u8 i = 0, j = 0;
+	for (i = 0; i < 5; i++)
+	{
+		for (j = 0; j < 8; j++)
+		{
+			while (DHT11_DATA_R == 0);//过滤54us的低电平
+			delay_us(50);//延时50us
+			Data[i] <<= 1;//空出来最低位，高位先发
+			if (DHT11_DATA_R == 1)//若仍是高电平
+			{
+				Data[i] |= 0x01;
+				while (DHT11_DATA_R == 1);//过滤剩余高电平
+			}
+		}
+	}
+	return 0;
+}
+
+
+/****************************************************
+函数功能：主机获取温湿度
+参    数：温度: float temp    湿度:u8 humi
+返 回 值：成功0
+备    注：
+*****************************************************/
+u8 DHT11_GetTempHumi(float* temp, u8* humi)
+{
+	u8 ret = 0;
+	u8 Data[5] = { 0 };
+	DHT11_Start();//起始信号
+	ret = DHT11_Respond();//响应信号
+	if (ret) return 1;
+	ret = DHT11_ReadData(Data);//数据接收
+	if (ret) return 2;
+	while (DHT11_DATA_R == 0);//过滤54us的低电平(结束信号）
+
+	if (((Data[0] + Data[1] + Data[2] + Data[3]) & 0xff) != Data[4])
+		return 3;
+	*humi = Data[0];
+	if (Data[3] & 0x80)//如果
+	{
+		*temp = -1 * (Data[2] + (Data[3] & 0x7f) / 10.0f);//
+	}
+	else
+	{
+		*temp = Data[2] + Data[3] / 10.0f;
+	}
+	return 0;
+}

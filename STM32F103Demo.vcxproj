@@ -91,7 +91,7 @@
     <ClCompile Include="CMSIS\core_cm3.c" />
     <ClCompile Include="CMSIS\stm32f10x_it.c" />
     <ClCompile Include="CMSIS\system_stm32f10x.c" />
-    <ClCompile Include="Hardwear\DHT11\DHT11.c" />
+    <ClCompile Include="Hardwear\DHT11\dht11.c" />
     <ClCompile Include="Hardwear\KEY\key.c" />
     <ClCompile Include="Hardwear\LED\led.c" />
     <ClCompile Include="Hardwear\DCMotor\dc_motor.c" />
@@ -133,7 +133,7 @@
     <ClInclude Include="CMSIS\stm32f10x_conf.h" />
     <ClInclude Include="CMSIS\stm32f10x_it.h" />
     <ClInclude Include="CMSIS\system_stm32f10x.h" />
-    <ClInclude Include="Hardwear\DHT11\DHT11.h" />
+    <ClInclude Include="Hardwear\DHT11\dht11.h" />
     <ClInclude Include="Hardwear\KEY\key.h" />
     <ClInclude Include="Hardwear\LED\led.h" />
     <ClInclude Include="Hardwear\DCMotor\dc_motor.h" />
