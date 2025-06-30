@@ -10,6 +10,7 @@
 #include "dc_motor.h"
 #include "stepmotor.h"
 #include "rgb.h"
+#include "DHT11.h" // Include DHT11 driver header
 
 
 #endif // _MAIN_H_
