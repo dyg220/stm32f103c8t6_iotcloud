@@ -1,0 +1,2 @@
+﻿  正在验证源
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Microsoft\VC\v170\Application Type\Linux\1.0\Linux.Makefile.Targets(206,5): error : 无法连接到远程系统。请验证你的连接设置，并验证你的计算机是否已联网并且可访问。

@@ -11,6 +11,6 @@
 void DHT11_Init(void);
 void DHT11_Start(void);
 u8 DHT11_Respond(void);
-u8 DHT11_GetTempHumi(float *temp, u8 *humi);
+u8 DHT11_GetTempHumi(float* temp, u8* humi);
 
 #endif
