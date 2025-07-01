@@ -11,6 +11,8 @@
 #include "stepmotor.h"
 #include "rgb.h"
 #include "DHT11.h" // Include DHT11 driver header
+#include "infrared.h" 
+
 
 
 #endif // _MAIN_H_
