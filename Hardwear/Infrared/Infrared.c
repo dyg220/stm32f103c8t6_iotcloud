@@ -20,7 +20,6 @@ void Infrared_Init(void)
 	TIM2_Config();//定时器配置
 }
 
-
 INFRARED_INFO Infrared_info_t = { 0 };
 
 //TIM2中断服务函数
@@ -69,7 +68,6 @@ void TIM2_IRQHandler(void)
 		}
 	}
 }
-
 
 /****************************************************
 函数功能：解析红外NEC位
