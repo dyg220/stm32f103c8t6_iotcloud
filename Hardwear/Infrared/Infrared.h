@@ -3,7 +3,7 @@
 
 #include "stm32f10x.h"                  // Device header
 #include "tim2.h"
-#include "stdio.h"
+#include <stdio.h>
 
 typedef struct {
 	u16 TimeCnt[128];//电平时间
