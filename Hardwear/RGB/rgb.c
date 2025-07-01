@@ -2,7 +2,8 @@
 #include "delay.h"
 #include <stdio.h>
 
-void RGB_Init(void) {
+void RGB_Init(void)
+{
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;		//PB8为时钟，PB9为数据
