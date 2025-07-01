@@ -6,23 +6,23 @@ u8 Humi = 0;
 int main()
 {
 	// u8 key_num = 0;
-	//u8 ret = 0;
+	// u8 ret = 0;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); // 关系到配置抢占和响应数字的范围
 	LED_Init();
 	Key_Init();
 	Relay_Init();
 	USART1_Config(115200);
 	// dcMotor_Config();
-	// StepMotor_Init();
+	StepMotor_Init();
 	// USART1_SendStr((u8*)"Hello, USART1!\r\n");
 	RGB_Init();
 	DHT11_Init();
 	printf("Reset!!!\r\n");
 
 	// RGB_Control(0, 0, 0xff);
-	// StepMotor_Control(100, 1);
 	while (1)
 	{
+		StepMotor_Control(0, 1);
 		/*ret = DHT11_GetTempHumi(&Temp, &Humi);
 		if (ret)
 		{
@@ -34,7 +34,7 @@ int main()
 		}
 		delay_ms(2000);*/
 
-		if (Infrared_info_t.CaptureOver == 1)//采集结束
+		if (Infrared_info_t.CaptureOver == 1) // 采集结束
 		{
 			Infrared_info_t.CaptureOver = 0;
 			printf("捕获的边沿数：%d\r\n", Infrared_info_t.EdgeCnt);
