@@ -1,5 +1,6 @@
 #include "usart1.h"
 #include <stdio.h>
+#include <string.h>
 
 /****************************************************
 函数功能：USART1初始化函数
