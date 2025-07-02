@@ -84,7 +84,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakePreprocessorDefinitions>__arm__;__CC_ARM;__GNUC__;__STRICT_ANSI__;USE_STDPERIPH_DRIVER;STM32F10X_MD</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;C:\stm32_work\0_STM32F103C8T6\Cmsis;C:\stm32_work\0_STM32F103C8T6\STM32F10x_StdPeriph_Driver\inc;C:\stm32_work\0_STM32F103C8T6\User\inc;C:\stm32_work\0_STM32F103C8T6\Hardwear\LED;C:\stm32_work\0_STM32F103C8T6\Hardwear\KEY;C:\stm32_work\0_STM32F103C8T6\Hardwear\RELAY;C:\stm32_work\0_STM32F103C8T6\Hardwear\DCMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\StepMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\RGB;C:\stm32_work\0_STM32F103C8T6\Hardwear\DHT11;C:\stm32_work\0_STM32F103C8T6\Hardwear\Infrared</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;C:\stm32_work\0_STM32F103C8T6\Cmsis;C:\stm32_work\0_STM32F103C8T6\STM32F10x_StdPeriph_Driver\inc;C:\stm32_work\0_STM32F103C8T6\User\inc;C:\stm32_work\0_STM32F103C8T6\Hardwear\LED;C:\stm32_work\0_STM32F103C8T6\Hardwear\KEY;C:\stm32_work\0_STM32F103C8T6\Hardwear\RELAY;C:\stm32_work\0_STM32F103C8T6\Hardwear\DCMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\StepMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\RGB;C:\stm32_work\0_STM32F103C8T6\Hardwear\DHT11;C:\stm32_work\0_STM32F103C8T6\Hardwear\Infrared;C:\stm32_work\0_STM32F103C8T6\Hardwear\OLED</NMakeIncludeSearchPath>
     <RemoteCCompileToolExe>gcc</RemoteCCompileToolExe>
   </PropertyGroup>
   <ItemGroup>
@@ -96,6 +96,7 @@
     <ClCompile Include="Hardwear\KEY\key.c" />
     <ClCompile Include="Hardwear\LED\led.c" />
     <ClCompile Include="Hardwear\DCMotor\dc_motor.c" />
+    <ClCompile Include="Hardwear\OLED\oled.c" />
     <ClCompile Include="Hardwear\RELAY\relay.c" />
     <ClCompile Include="Hardwear\RGB\rgb.c" />
     <ClCompile Include="Hardwear\StepMotor\stepmotor.c" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Hardwear\KEY\key.h" />
     <ClInclude Include="Hardwear\LED\led.h" />
     <ClInclude Include="Hardwear\DCMotor\dc_motor.h" />
+    <ClInclude Include="Hardwear\OLED\oled.h" />
     <ClInclude Include="Hardwear\RELAY\relay.h" />
     <ClInclude Include="Hardwear\RGB\rgb.h" />
     <ClInclude Include="Hardwear\StepMotor\stepmotor.h" />

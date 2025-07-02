@@ -12,6 +12,8 @@
 #include "rgb.h"
 #include "DHT11.h" // Include DHT11 driver header
 #include "infrared.h" 
+#include "oled.h" 
+
 
 
 

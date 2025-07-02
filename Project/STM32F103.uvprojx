@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Cmsis;..\STM32F10x_StdPeriph_Driver\inc;..\User\inc;..\Hardwear\LED;..\Hardwear\KEY;..\Hardwear\RELAY;..\Hardwear\DCMotor;..\Hardwear\StepMotor;..\Hardwear\RGB;..\Hardwear\DHT11;..\Hardwear\Infrared</IncludePath>
+              <IncludePath>..\Cmsis;..\STM32F10x_StdPeriph_Driver\inc;..\User\inc;..\Hardwear\LED;..\Hardwear\KEY;..\Hardwear\RELAY;..\Hardwear\DCMotor;..\Hardwear\StepMotor;..\Hardwear\RGB;..\Hardwear\DHT11;..\Hardwear\Infrared;..\Hardwear\OLED</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -481,6 +481,11 @@
               <FileName>Infrared.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardwear\Infrared\Infrared.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardwear\OLED\oled.c</FilePath>
             </File>
           </Files>
         </Group>

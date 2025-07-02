@@ -13,16 +13,18 @@ int main()
 	Relay_Init();
 	USART1_Config(115200);
 	// dcMotor_Config();
-	StepMotor_Init();
+	//StepMotor_Init();
 	// USART1_SendStr((u8*)"Hello, USART1!\r\n");
 	RGB_Init();
 	DHT11_Init();
+	Infrared_Init();
+	OLED_Init();
 	printf("Reset!!!\r\n");
 
 	// RGB_Control(0, 0, 0xff);
 	while (1)
 	{
-		StepMotor_Control(0, 1);
+		// StepMotor_Control(100, 1);
 		/*ret = DHT11_GetTempHumi(&Temp, &Humi);
 		if (ret)
 		{
