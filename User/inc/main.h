@@ -13,6 +13,7 @@
 #include "DHT11.h" // Include DHT11 driver header
 #include "infrared.h" 
 #include "oled.h" 
+#include "spi2.h"
 
 
 

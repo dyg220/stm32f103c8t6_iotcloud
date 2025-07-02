@@ -97,6 +97,7 @@
     <ClCompile Include="Hardwear\LED\led.c" />
     <ClCompile Include="Hardwear\DCMotor\dc_motor.c" />
     <ClCompile Include="Hardwear\OLED\oled.c" />
+    <ClCompile Include="User\src\spi2.c" />
     <ClCompile Include="Hardwear\RELAY\relay.c" />
     <ClCompile Include="Hardwear\RGB\rgb.c" />
     <ClCompile Include="Hardwear\StepMotor\stepmotor.c" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Hardwear\LED\led.h" />
     <ClInclude Include="Hardwear\DCMotor\dc_motor.h" />
     <ClInclude Include="Hardwear\OLED\oled.h" />
+    <ClInclude Include="User\inc\spi2.h" />
     <ClInclude Include="Hardwear\RELAY\relay.h" />
     <ClInclude Include="Hardwear\RGB\rgb.h" />
     <ClInclude Include="Hardwear\StepMotor\stepmotor.h" />

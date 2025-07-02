@@ -13,14 +13,14 @@ int main()
 	Relay_Init();
 	USART1_Config(115200);
 	// dcMotor_Config();
-	//StepMotor_Init();
+	// StepMotor_Init();
 	// USART1_SendStr((u8*)"Hello, USART1!\r\n");
 	RGB_Init();
 	DHT11_Init();
 	Infrared_Init();
 	OLED_Init();
+	OLED_setCursor(20, 0);
 	printf("Reset!!!\r\n");
-
 	// RGB_Control(0, 0, 0xff);
 	while (1)
 	{

@@ -1,26 +1,27 @@
-#ifndef _OLED_H_
-#define _OLED_H_
+#ifndef _OLED_H
+#define _OLED_H
 #include "stm32f10x.h"
 #include "delay.h"
 
+#define OLED_CS_H  GPIO_SetBits(GPIOB, GPIO_Pin_12) // OLED片选
+#define OLED_CS_L  GPIO_ResetBits(GPIOB, GPIO_Pin_12) // OLED片选
 
+#define OLED_RES_H GPIO_SetBits(GPIOB, GPIO_Pin_6) // OLED复位
+#define OLED_RES_L GPIO_ResetBits(GPIOB, GPIO_Pin_6) // OLED复位
+
+#define OLED_DC_H  GPIO_SetBits(GPIOB, GPIO_Pin_7) // OLED数据/命令选择
+#define OLED_DC_L  GPIO_ResetBits(GPIOB, GPIO_Pin_7) // OLED数据/命令选择
+
+
+void OLED_Pin_Init(void);
+void OLED_WriteCommand(u8 Command);
+void OLED_WriteData(u8 Data);
 void OLED_Init(void);
-void OLED_WriteCommand(uint8_t cmd);
-//void OLED_Clear(void);
-//void OLED_SetPos(uint8_t x, uint8_t y);
-//void OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr);
-//void OLED_ShowString(uint8_t x, uint8_t y, const char* str);
-//void OLED_ShowNum(uint8_t x, uint8_t y, uint32_t num, uint8_t len);
-//void OLED_ShowHexNum(uint8_t x, uint8_t y, uint32_t num, uint8_t len);
-//void OLED_ShowChinese(uint8_t x, uint8_t y, uint8_t index);
-//void OLED_ShowPicture(uint8_t x, uint8_t y, const uint8_t* pic, uint16_t width, uint16_t height);
-//
-//void OLED_WriteData(uint8_t data);
-//void OLED_WriteString(uint8_t x, uint8_t y, const char* str);
-//void OLED_WriteNum(uint8_t x, uint8_t y, uint32_t num, uint8_t len);
-//void OLED_WriteHexNum(uint8_t x, uint8_t y, uint32_t num, uint8_t len);
-//void OLED_WriteChinese(uint8_t x, uint8_t y, uint8_t index);
-//void OLED_WritePicture(uint8_t x, uint8_t y, const uint8_t* pic, uint16_t width, uint16_t height);
+void OLED_setCursor(u8 X, u8 Page);
+void OLED_Clear(void);
 
 
-#endif // !1
+
+#endif // !_OLED_H
+
+
