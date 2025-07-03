@@ -21,7 +21,7 @@ void SPI2_Config(void)
 	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; // MSB first
 	SPI_Init(SPI2, &SPI_InitStructure);
 
-	SPI_Cmd(SPI2, ENABLE); 
+	SPI_Cmd(SPI2, ENABLE);
 
 }
 
