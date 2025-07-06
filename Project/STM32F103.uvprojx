@@ -412,6 +412,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\src\spi2.c</FilePath>
             </File>
+            <File>
+              <FileName>usart2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\src\usart2.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

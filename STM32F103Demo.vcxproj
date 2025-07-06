@@ -130,6 +130,7 @@
     <ClCompile Include="User\src\tim2.c" />
     <ClCompile Include="User\src\tim4.c" />
     <ClCompile Include="User\src\usart1.c" />
+    <ClCompile Include="User\src\usart2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMSIS\core_cm3.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="User\inc\tim2.h" />
     <ClInclude Include="User\inc\tim4.h" />
     <ClInclude Include="User\inc\usart1.h" />
+    <ClInclude Include="User\inc\usart2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

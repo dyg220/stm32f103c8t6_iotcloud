@@ -5,13 +5,14 @@ u8 Humi = 0;
 
 int main()
 {
-	// u8 key_num = 0;
-	// u8 ret = 0;
+	//u8 key_num = 0;
+	//u8 ret = 0;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); // 关系到配置抢占和响应数字的范围
 	LED_Init();
 	Key_Init();
 	Relay_Init();
 	USART1_Config(115200);
+	USART2_Config(115200);
 	// dcMotor_Config();
 	// StepMotor_Init();
 	// USART1_SendStr((u8*)"Hello, USART1!\r\n");
@@ -30,7 +31,7 @@ int main()
 	while (1)
 	{
 		// StepMotor_Control(100, 1);
-		/*ret = DHT11_GetTempHumi(&Temp, &Humi);
+	/*	ret = DHT11_GetTempHumi(&Temp, &Humi);
 		if (ret)
 		{
 			printf("ret = %d\r\n", ret);
