@@ -67,7 +67,7 @@ int main()
 		//{
 		//	//DCMotor_SetSpeed(0);
 		// }
-		RECV_USART1(); // 接收USART1数据
+		RECV_USART2(); // 接收USART2数据
 	}
 	return 0;
 }

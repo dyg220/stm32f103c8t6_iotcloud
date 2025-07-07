@@ -11,7 +11,9 @@ typedef struct
     u16 r_len;
     u8 r_Flag;
 
-} WiFi_INFO;
+}WiFi_INFO;
+
+extern WiFi_INFO WiFi_Rev;
 
 void USART2_Config(u32 baud);
 void USART2_SendByte(u8 Byte);
