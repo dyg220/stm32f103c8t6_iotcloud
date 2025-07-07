@@ -16,6 +16,7 @@
 #include "oled.h" 
 #include "OLED_Data.h"
 #include "spi2.h"
+#include "wifi.h"
 
 
 

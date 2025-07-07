@@ -12,7 +12,6 @@ int main()
 	Key_Init();
 	Relay_Init();
 	USART1_Config(115200);
-	USART2_Config(115200);
 	// dcMotor_Config();
 	// StepMotor_Init();
 	// USART1_SendStr((u8*)"Hello, USART1!\r\n");
@@ -27,6 +26,7 @@ int main()
 	OLED_ShowString(0, 32, "ÄãºÃ", OLED_8X16);
 	OLED_Update();
 	printf("Reset!!!\r\n");
+	WiFi_Init();
 	// RGB_Control(0, 0, 0xff);
 	while (1)
 	{
