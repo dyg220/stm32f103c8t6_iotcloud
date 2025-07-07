@@ -12,13 +12,13 @@ extern  WiFi_INFO WiFi_Rev;
 void WiFi_Init(void)
 {
 	u8 ret = 0;
-	char WiFi_Name[32] = "xht8607";
-	char WiFi_Pwd[32] = "123456789";
+	char WiFi_Name[32] = "tatt8990";
+	char WiFi_Pwd[32] = "22336699";
 	char CliendID[64] = "123|securemode=3\\,signmethod=hmacsha1|";
-	char Username[64] = "SmartHomeV1.3&a1I4YMt3fHC";
-	char Password[64] = "A45137A978290E0C59E6CAE9B5CBF58219391F66";
+	char Username[64] = "SamarHomeV1.0&a1sQGf30de7";
+	char Password[64] = "EC8EFA2B87BE190DA84F0895A2D2ECDD51E0CFB4";
 	char ServerIP[32] = "203.107.45.14";
-	char Sub[64] = "/sys/a1I4YMt3fHC/SmartHomeV1.3/thing/service/property/set";
+	char Sub[64] = "/sys/a1sQGf30de7/SamarHomeV1.0/thing/service/property/set";
 
 	WiFi_SendAT("AT+RST\r\n", "ready", 2000);
 	WiFi_SendAT("AT+CWAUTOCONN=0\r\n", "OK", 2000);//取消WiFi自动连接
@@ -87,8 +87,6 @@ u8 WiFi_SendAT(char* AT, char* respond, u16 TimeOut)
 		}
 	}
 }
-
-
 
 /**********************************************************
 *函数功能：模块连接热点

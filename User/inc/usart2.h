@@ -17,7 +17,7 @@ typedef struct
 
 void USART2_Config(u32 baud);
 void USART2_SendByte(u8 Byte);
-void USART2_SendStr(char *str);
+void USART2_SendStr(char* str);
 void RECV_USART2(void);
 
 
