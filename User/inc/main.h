@@ -19,7 +19,5 @@
 #include "wifi.h"
 
 
-
-
 #endif // _MAIN_H_
 
