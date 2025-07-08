@@ -84,7 +84,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakePreprocessorDefinitions>__arm__;__CC_ARM;__GNUC__;__STRICT_ANSI__;USE_STDPERIPH_DRIVER;STM32F10X_MD</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;C:\stm32_work\0_STM32F103C8T6\Cmsis;C:\stm32_work\0_STM32F103C8T6\STM32F10x_StdPeriph_Driver\inc;C:\stm32_work\0_STM32F103C8T6\User\inc;C:\stm32_work\0_STM32F103C8T6\Hardwear\LED;C:\stm32_work\0_STM32F103C8T6\Hardwear\KEY;C:\stm32_work\0_STM32F103C8T6\Hardwear\RELAY;C:\stm32_work\0_STM32F103C8T6\Hardwear\DCMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\StepMotor;C:\stm32_work\0_STM32F103C8T6\Hardwear\RGB;C:\stm32_work\0_STM32F103C8T6\Hardwear\DHT11;C:\stm32_work\0_STM32F103C8T6\Hardwear\Infrared;C:\stm32_work\0_STM32F103C8T6\Hardwear\OLED;C:\stm32_work\0_STM32F103C8T6\Hardwear\WiFi</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\ARMCC\include;Cmsis;STM32F10x_StdPeriph_Driver/inc;User/inc;Hardwear/LED;Hardwear/KEY;Hardwear/RELAY;Hardwear/DCMotor;Hardwear/StepMotor;Hardwear/RGB;Hardwear/DHT11;Hardwear/Infrared;Hardwear/OLED;Hardwear/WiFi</NMakeIncludeSearchPath>
     <RemoteCCompileToolExe>gcc</RemoteCCompileToolExe>
   </PropertyGroup>
   <ItemGroup>
@@ -187,7 +187,6 @@
     <None Include="CMSIS\startup_stm32f10x_md.s" />
     <None Include="keilkill.bat" />
     <None Include="README.md" />
-    <None Include="test1.v" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
